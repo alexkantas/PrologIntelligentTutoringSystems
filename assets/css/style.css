@@ -1,0 +1,139 @@
+.main-background{
+    /*background: linear-gradient(to left, #0575e6, #021b79);*/
+    background-image: url('../img/clouds.jpg');
+    background-position-x: center;
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #53bcec;
+}
+
+.main-grid{
+    height: 100%; 
+}
+
+#main-header{
+    color:#fff;
+    margin-top: 1rem;
+}
+
+.main-area{
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.main-form-area{
+    max-height: 80vh;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.start-question-block{
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.start-question-block .button{
+    font-size: 2rem !important;
+}
+
+
+.main-description{
+    font-size:1.5rem;
+}
+
+.login-button-area{
+    margin-top: 2rem; 
+}
+
+.login-button-area .button{
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+    font-size: 1.5rem;
+    padding: 2rem; 
+}
+
+ .main-segment{
+     margin-top: 1rem;
+     text-align: center;
+ }
+
+ .main-segment-description{
+     font-size: 1.5rem;
+ }
+
+
+ .paths-area{
+     margin-top: 3rem;
+ }
+
+ .path-object{
+     height: 70vh;
+ }
+
+ .path-content{
+     margin-top: 0.7rem;
+     overflow-y: auto;
+     max-height: 85%;
+     font-size: 1.4rem;
+     line-height: 2rem;
+ }
+
+ .well-done-object{
+     text-align: center;
+ }
+
+.simple-margin{
+    margin: 1rem;
+    content: '';
+}
+
+.review-object{
+    position: relative;
+}
+
+.review-text{
+    font-size: 1.2rem;
+}
+
+.question-button{
+    margin-top: 0.5rem !important;
+}
+
+.timer-element{
+    width: 60% ;
+    position: absolute ;
+    bottom: 0.3rem ;
+    right: 0.3rem ;
+    text-align: center ;
+}
+
+.full-width-height{
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (min-width: 768px){
+    
+    .main-form-area{
+        width: 50%;
+    }
+
+    .login-button-area .button{
+        width: 30%;
+    }
+
+
+    .start-question-block{
+        width: 50%;
+    }
+
+} 
