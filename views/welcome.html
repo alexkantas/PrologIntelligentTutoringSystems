@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Alex Kantas">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+
+    <title>{{= title }}</title>
+
+    <!-- Semantic core CSS -->
+    <link href="assets/css/semantic.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="main-background">
+
+    <div class="ui one column centered grid container main-grid">
+        <div class="ui column">
+            <div id="main-header" class="ui huge header">{{= title }}</div>
+
+            <div class="ui raised segment segment-area">
+                <div class="ui big red ribbon label">
+                    <h2>Βρίσκεστε στο <strong>Μάθημα {{= lesson }}</strong></h2>
+                </div>
+                <div class="main-description">
+                    <img class="ui medium centered image" src="assets/img/books.png">
+                    <h2>Το μάθημα έχει ως στόχο, οι χρήστες:</h2>
+                    <h2>{{= targets }}</h2>
+                    <div  class="start-question-block">
+                    <h2>Θέλετε να ξεκινήσετε;</h2>
+                    <div class="ui two buttons">
+                        <a href="/logIn" class="ui negative button">Οχι</a>
+                        <a href="/selection" class="ui positive button">Ναι</a>
+                    </div>
+                    </div>
+                </div>
+                <!-- /Segment -->
+            </div>
+            <!-- /Column -->
+        </div>
+        <div class="simple-margin">&nbsp</div>
+        <!-- /Centered Grid -->
+    </div>
+
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Semantic core JavaScript-->
+    <script src="assets/js/semantic.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
