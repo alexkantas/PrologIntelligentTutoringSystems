@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Alex Kantas">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+
+    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+
+    <!-- Semantic core CSS -->
+    <link href="assets/css/semantic.css" rel="stylesheet">
+
+    <!-- Animated core CSS -->
+    <link href="assets/css/animate.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="main-background">
+
+    <div class="ui middle aligned one column centered grid container main-grid">
+        <div class="ui column">
+            <div class="main-form-area">
+                <div class="ui negative message" style="display:none">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Τα στοιχεία που δώσατε είναι λάθος
+                    </div>
+                    <p>Παρακαλώ προσπαθήστε ξανά</p>
+                </div>
+                <div class="ui attached icon message">
+                    <i class="inbox icon"></i>
+                    <div class="content">
+                        <div class="header">
+                            <h1>Prolog Intelligent Tutoring Systems</h1>
+                        </div>
+                        <p>Παρακαλώ εισάγετε το όνομα και το κωδικό χρήστη</p>
+                    </div>
+                </div>
+                <form id="log-in-form" class="ui big form attached fluid segment" action="/go">
+                    <div class="field">
+                        <label>Όνομα χρήστη</label>
+                        <input name="username" placeholder="Γράψε το όνομα χρήστη σου" type="text" required>
+                    </div>
+                    <div class="field">
+                        <label>Κωδικός χρήστη</label>
+                        <input name="password" placeholder="Γράψε το κωδικό χρήστη σου" type="password" required>
+                    </div>
+                    <input type="submit" value="Είσοδος" class=" ui blue submit  button"></input>
+                </form>
+                <!-- /Main area -->
+            </div>
+            <!-- /Column -->
+        </div>
+        <!-- /Centered Grid -->
+    </div>
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Semantic core JavaScript-->
+    <script src="assets/js/semantic.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Alex Kantas">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+
+    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+
+    <!-- Semantic core CSS -->
+    <link href="assets/css/semantic.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="main-background">
+    <div class="ui container">
+
+        <div class="main-segment">
+            <div class="ui segment">
+                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
+                <div class="main-segment-description">
+                    <p>Στο δεξί μέρος της σελίδας υπάρχει το περιβάλλον εργασίας στο οποίο θα ελέγχεται το λειτουργικό κομμάτι
+                        της άσκησης πριν την υποβάλλεται στο σύστημα στο πεδίο απάντηση!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="paths-area">
+            <div class="ui stackable grid">
+
+                <div class="four wide column">
+                    <div class="ui segment path-object">
+                        <div class="full-width-height review-object">
+
+                            <h1 class="ui dividing header">Ερώτηση <span id="question-number">1</span></h1>
+
+                            <p id="question-1-description" class="review-text">
+                                Γράψετε κατηγόρημα occurrences(L, X, N) το οποίο είναι αληθές εάν Ν είναι το πλήθος των επαναλήψεων του στοιχείου Χ στην
+                                λίστα L.Η υλοποίηση να γίνει με την τεχνική κατασκευής δομής στη κεφαλή της πρότασης.
+                            </p>
+
+                            <p id="question-2-description" class="review-text" style='display:none'>
+                                Γράψετε κατηγόρημα occurrences(L, X, N) το οποίο είναι αληθές εάν Ν είναι το πλήθος των επαναλήψεων του στοιχείου Χ στην
+                                λίστα L.Η υλοποίηση να γίνει με την τεχνική κατασκευής δομής στη κεφαλή της πρότασης.
+                            </p>
+
+                            <form class="ui form" action="/result">
+                                <div class="field">
+                                    <label>Απάντηση</label>
+                                    <input type="text" name="ans1" id="ans1">
+                                    <input type="text" name="ans2" id="ans2" style="display:none" required>
+                                </div>
+                                <button id="submit-button" class="ui blue submit button" type="submit" style="display:none">Αποστολή</button>
+                            </form>
+                            <button id="nextq-button" class="ui green button">Επόμενη ερώτηση</button>
+                            <div class="timer-element">
+                                <div class="ui mini icon message">
+                                    <i class="notched hourglass full icon"></i>
+                                    <div class="content">
+                                        <div class="header">
+                                            <h1 id="seconds-left">60</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="twelve wide column">
+                    <div class="ui segment path-object">
+                        <iframe src="http://swish.swi-prolog.org/" id="prolog-site" class="full-width-height"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="simple-margin">&nbsp</div>
+
+        <!-- /container -->
+    </div>
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Semantic core JavaScript-->
+    <script src="assets/js/semantic.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+     reviewPage();
+    </script>
+
+</body>
+
+</html>
