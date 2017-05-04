@@ -9,6 +9,8 @@
 :- use_module(library(http/html_write)).
 % html_resource
 :- use_module(library(http/html_head)).
+% module for sessions
+:- use_module(library(http/http_session)).
 
 :- use_module(prolog/st/st_parse).
 :- use_module(prolog/st/st_render).
@@ -41,8 +43,7 @@ checkUserPwd(std2, crete).*/
 checkUserPwd(UserId, PWD)  :- 
      (UserId = 'std1', PWD=kal);
 	 (UserId = 'std2', PWD=crete);
-	 (UserId = 'std3', PWD=athens);
-	 (UserId = 'tch', PWD=tch).	
+	 (UserId = 'std3', PWD=athens).	
 
 server(Port) :-
         http_server(http_dispatch, [port(Port)]).
@@ -60,6 +61,8 @@ say_hi(_Request) :-
 		}, Out, []).
 
 arxiki_selida_input(Request) :-
+		http_session_retractall(less_id(X)),
+		http_session_retractall(user_id(X)),
 		format('Content-type: text/html~n~n'),
 		current_output(Out),
 		st_render_file(views/logIn, _{
@@ -70,8 +73,7 @@ arxiki_selida_input(Request) :-
 katigorima_parousiasi_apotelesmaton(Request):-
 http_parameters(Request,[ username(UserId, []),password(PWD, [])]),
 		   (checkUserPwd(UserId, PWD),
-		  ((UserId=tch,PWD=tch,teacher(UserId));
-		   (start_lesson(UserId,PWD)));
+		  ((start_lesson(UserId,PWD)));
 		   (format('Content-type: text/html~n~n'),
 			current_output(Out),
 			st_render_file(views/logIn, _{
@@ -83,6 +85,8 @@ http_parameters(Request,[ username(UserId, []),password(PWD, [])]),
 start_lesson(UserId,PWD) :-
 		format('Content-type: text/html~n~n'),
 		lessons(UserId,Lesson,LessId,LessonType),
+		http_session_assert(user_id(UserId)),
+		http_session_assert(less_id(LessId)),
 		clause(kb_lesson(LessId,L,Goal_Id),K),
 		clause(kb_stoxoi(Goal_Id,Text_G),B),
 		current_output(Out),
@@ -96,6 +100,7 @@ start_lesson(UserId,PWD) :-
 selection(_Request) :-
 		format('Content-type: text/html~n~n'),
 		current_output(Out),
+		user_id(UserId),
 		st_render_file(views/pathSelection, _{
 			title: 'Prolog Intelligent Tutoring Systems'
 		}, Out, []).
@@ -130,6 +135,9 @@ courseSelection(UserId, LessId, LessonType,NLessId) :-
 				NLessId=NewLessId
 				)
 			).
-			
+
+user_id(UserId) :-
+	http_session_data(user_id(UserId)),!.
+
 last1(X, [X]).
 last1(X, [ Head | Tail] ):- last1(X,Tail).
