@@ -32,8 +32,10 @@ http:location(files, '/assets', []).
 
 :- http_handler(root(.),say_hi,[]).
 :- http_handler(root(logIn),arxiki_selida_input,[]).
+:- http_handler(root(logOut),logout,[]).
 :- http_handler(root(welcome), katigorima_parousiasi_apotelesmaton, []).
 :- http_handler(root(selection),selection,[]).
+:- http_handler(root(review),assessment,[]).
 
 /*  Το κατηγόρημα checkUserPwd(UserId, PWD) είναι αληθές  εαν  
 UserId είναι το όνομα χρήστης και PWD είναι ο κωδικός χρήστη.
@@ -62,12 +64,24 @@ say_hi(_Request) :-
 
 arxiki_selida_input(Request) :-
 		http_session_retractall(less_id(X)),
+		http_session_retractall(ass_id(X)),
 		http_session_retractall(user_id(X)),
 		format('Content-type: text/html~n~n'),
 		current_output(Out),
 		st_render_file(views/logIn, _{
 			title: 'Prolog Intelligent Tutoring Systems',
 			errorMessage: 0
+		}, Out, []).
+
+logout(Request) :-
+		http_session_retractall(less_id(X)),
+		http_session_retractall(ass_id(X)),
+		http_session_retractall(user_id(X)),
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/logIn, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			errorMessage: 2
 		}, Out, []).
 		
 katigorima_parousiasi_apotelesmaton(Request):-
@@ -89,6 +103,9 @@ start_lesson(UserId,PWD) :-
 		http_session_assert(less_id(LessId)),
 		clause(kb_lesson(LessId,L,Goal_Id),K),
 		clause(kb_stoxoi(Goal_Id,Text_G),B),
+		courseSelection(UserId, LessId, LessonType,NLessId) ,
+		clause(kb_lesson(NLessId,[LectureId,PracticeId,AssesmentId],Goal),B),
+		http_session_assert(ass_id(AssesmentId)),
 		current_output(Out),
 		st_render_file(views/welcome, _{
 			title: 'Prolog Intelligent Tutoring Systems',
@@ -135,9 +152,29 @@ courseSelection(UserId, LessId, LessonType,NLessId) :-
 				NLessId=NewLessId
 				)
 			).
+			
+assessment(Request) :-
+			less_id(LessId),
+			ass_id(AssId),
+			clause(kb_lesson_assessment(LessId,AssId,TestId),B1),
+			bagof(ExId,kb_test_assessment(TestId,ExId,ExersiceType,AnswerId,Grade)^clause(kb_test_assessment(TestId,ExId,ExersiceType,AnswerId,Grade),B4), L),
+			L=[H|G],
+			G=[T],
+			clause(kb_exersise_assessment(H,Text_exA),B3),
+			clause(kb_exersise_assessment(T,Text_exB),B6),
+			reply_html_page(
+	[title('Howdy')],
+	[h1('Reviw !!!')]
+	).
 
 user_id(UserId) :-
 	http_session_data(user_id(UserId)),!.
+
+less_id(LessId) :-
+	http_session_data(less_id(LessId)),!.
+
+ass_id(AssId) :-
+	http_session_data(ass_id(AssId)),!.
 
 last1(X, [X]).
 last1(X, [ Head | Tail] ):- last1(X,Tail).

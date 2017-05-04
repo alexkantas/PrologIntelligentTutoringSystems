@@ -22,6 +22,7 @@
     <div class="ui middle aligned one column centered grid container main-grid">
         <div class="ui column">
             <div class="main-form-area">
+			
 			{{ if errorMessage=1 }}
                 <div class="ui negative message">
                     <i class="close icon"></i>
@@ -31,6 +32,17 @@
                     <p>Παρακαλώ προσπαθήστε ξανά</p>
                 </div>
 			{{ end }}
+			
+			{{ if errorMessage=2 }}
+                <div class="ui positive message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Επιτυχής αποσύνδεση
+                    </div>
+                    <p>Αποσυνδεθήκατε επιτυχώς απο το σύστημα</p>
+                </div>
+			{{ end }}
+			
                 <div class="ui attached icon message">
                     <i class="student icon"></i>
                     <div class="content">
