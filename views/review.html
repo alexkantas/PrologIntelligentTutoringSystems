@@ -7,7 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+    <title>{{= title }}</title>
 
     <!-- Semantic core CSS -->
     <link href="assets/css/semantic.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
         <div class="main-segment">
             <div class="ui segment">
-                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
+                <div class="ui huge header">{{= title }}</div>
                 <div class="main-segment-description">
                     <p>Στο δεξί μέρος της σελίδας υπάρχει το περιβάλλον εργασίας στο οποίο θα ελέγχεται το λειτουργικό κομμάτι
                         της άσκησης πριν την υποβάλλεται στο σύστημα στο πεδίο απάντηση!</p>
@@ -40,16 +40,14 @@
                             <h1 class="ui dividing header">Ερώτηση <span id="question-number">1</span></h1>
 
                             <p id="question-1-description" class="review-text">
-                                Γράψετε κατηγόρημα occurrences(L, X, N) το οποίο είναι αληθές εάν Ν είναι το πλήθος των επαναλήψεων του στοιχείου Χ στην
-                                λίστα L.Η υλοποίηση να γίνει με την τεχνική κατασκευής δομής στη κεφαλή της πρότασης.
+                                {{=questionA}}
                             </p>
 
                             <p id="question-2-description" class="review-text" style='display:none'>
-                                Γράψετε κατηγόρημα occurrences(L, X, N) το οποίο είναι αληθές εάν Ν είναι το πλήθος των επαναλήψεων του στοιχείου Χ στην
-                                λίστα L.Η υλοποίηση να γίνει με την τεχνική κατασκευής δομής στη κεφαλή της πρότασης.
+                                {{=questionB}}
                             </p>
 
-                            <form class="ui form" action="/result">
+                            <form class="ui form" action="/reviewResult" method="POST">
                                 <div class="field">
                                     <label>Απάντηση</label>
                                     <input type="text" name="ans1" id="ans1">

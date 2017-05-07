@@ -102,6 +102,9 @@
 
 .review-text{
     font-size: 1.2rem;
+	max-height: 40%;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .question-button{

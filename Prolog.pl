@@ -1,4 +1,4 @@
-:- use_module(library(http/thread_httpd)).
+﻿:- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_error)).
 :- use_module(library(http/http_parameters)).
 % http_reply_from_files is here
@@ -36,6 +36,7 @@ http:location(files, '/assets', []).
 :- http_handler(root(welcome), katigorima_parousiasi_apotelesmaton, []).
 :- http_handler(root(selection),selection,[]).
 :- http_handler(root(review),assessment,[]).
+:- http_handler(root(reviewResult),results,[]).
 
 /*  Το κατηγόρημα checkUserPwd(UserId, PWD) είναι αληθές  εαν  
 UserId είναι το όνομα χρήστης και PWD είναι ο κωδικός χρήστη.
@@ -54,6 +55,7 @@ serve_files(Request) :-
 	 http_reply_from_files('assets', [], Request).
 serve_files(Request) :-
 	  http_404([], Request).
+	  
 
 say_hi(_Request) :-
 		format('Content-type: text/html~n~n'),
@@ -115,12 +117,18 @@ start_lesson(UserId,PWD) :-
 
 
 selection(_Request) :-
+		user_id(UserId),
 		format('Content-type: text/html~n~n'),
 		current_output(Out),
-		user_id(UserId),
 		st_render_file(views/pathSelection, _{
 			title: 'Prolog Intelligent Tutoring Systems'
 		}, Out, []).
+
+selection(_Request) :-
+	reply_html_page(
+	   [title('Πρόβλημα :-(')],
+	   [h1('Ουπς! Παρουσιάστικε κάποιο πρόβλημα!'),
+	    a(href='/logIn','Δοκίμασε να ξανασυνδεθείς!')]).
 
 lessons(UserId,Lesson,LessId,LessonType) :- 
         ((clause(student(UserId,PersDetails),Body1),UserType = old);
@@ -162,10 +170,26 @@ assessment(Request) :-
 			G=[T],
 			clause(kb_exersise_assessment(H,Text_exA),B3),
 			clause(kb_exersise_assessment(T,Text_exB),B6),
-			reply_html_page(
-	[title('Howdy')],
-	[h1('Reviw !!!')]
-	).
+			format('Content-type: text/html~n~n'),
+			current_output(Out),
+			st_render_file(views/review, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			questionA: Text_exA,
+			questionB: Text_exB
+			}, Out, []).
+
+results(_Request):-
+	user_id(UserId),
+	wellDone("Μπράβο ολοκλήρωσες την Αξιολόγηση!!!").
+	
+wellDone(Message):-
+			format('Content-type: text/html~n~n'),
+			current_output(Out),
+			st_render_file(views/wellDone, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			message: Message
+			}, Out, []).
+			
 
 user_id(UserId) :-
 	http_session_data(user_id(UserId)),!.
