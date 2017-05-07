@@ -65,38 +65,16 @@ say_hi(_Request) :-
 		}, Out, []).
 
 arxiki_selida_input(Request) :-
-		http_session_retractall(less_id(X)),
-		http_session_retractall(ass_id(X)),
-		http_session_retractall(user_id(X)),
-		format('Content-type: text/html~n~n'),
-		current_output(Out),
-		st_render_file(views/logIn, _{
-			title: 'Prolog Intelligent Tutoring Systems',
-			errorMessage: 0
-		}, Out, []).
+		logMessage(0).
 
 logout(Request) :-
-		http_session_retractall(less_id(X)),
-		http_session_retractall(ass_id(X)),
-		http_session_retractall(user_id(X)),
-		format('Content-type: text/html~n~n'),
-		current_output(Out),
-		st_render_file(views/logIn, _{
-			title: 'Prolog Intelligent Tutoring Systems',
-			errorMessage: 2
-		}, Out, []).
+		logMessage(2).
 		
 katigorima_parousiasi_apotelesmaton(Request):-
 http_parameters(Request,[ username(UserId, []),password(PWD, [])]),
 		   (checkUserPwd(UserId, PWD),
 		  ((start_lesson(UserId,PWD)));
-		   (format('Content-type: text/html~n~n'),
-			current_output(Out),
-			st_render_file(views/logIn, _{
-			title: 'Prolog Intelligent Tutoring Systems',
-			errorMessage: 1
-			}, Out, [])
-		   )).
+		   (logMessage(1))).
 	
 start_lesson(UserId,PWD) :-
 		format('Content-type: text/html~n~n'),
@@ -127,7 +105,7 @@ selection(_Request) :-
 selection(_Request) :-
 	reply_html_page(
 	   [title('Πρόβλημα :-(')],
-	   [h1('Ουπς! Παρουσιάστικε κάποιο πρόβλημα!'),
+	   [h1('Ουπς! Παρουσιάστηκε κάποιο πρόβλημα!'),
 	    a(href='/logIn','Δοκίμασε να ξανασυνδεθείς!')]).
 
 lessons(UserId,Lesson,LessId,LessonType) :- 
@@ -189,6 +167,17 @@ wellDone(Message):-
 			title: 'Prolog Intelligent Tutoring Systems',
 			message: Message
 			}, Out, []).
+			
+logMessage(Message):-
+		http_session_retractall(less_id(X)),
+		http_session_retractall(ass_id(X)),
+		http_session_retractall(user_id(X)),
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/logIn, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			errorMessage: Message
+		}, Out, []).
 			
 
 user_id(UserId) :-
