@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Alex Kantas">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+
+    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+
+    <!-- Semantic core CSS -->
+    <link href="assets/css/semantic.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="main-background">
+    <div class="ui container">
+
+        <div class="main-segment">
+            <div class="ui segment">
+                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
+                <div class="main-segment-description">
+                </div>
+            </div>
+        </div>
+
+        <div class="paths-area">
+            <div class="ui one column  grid">
+
+                <div class="column">
+                    <div class="ui segments">
+                        <div class="ui segment text-center">
+                            <h1>Αποτελέσματα</h1>
+                        </div>
+                        <div class="ui brown segment path-object well-done-object results-object">
+
+                            <p>Το score σου στην πρώτη άσκηση είναι 4.</p>
+                            <p>Το score σου στην δεύτερη άσκηση είναι 6.</p>
+                            <p>Η σωστή απάντηση για την πρώτη άσκηση είναι 'occurrences(L, X, N).'</p>
+                            <p>Η σωστή απάντηση για την δεύτερη άσκηση είναι 'Lisa(L, X, N).'</p>
+                            <h2>Τελικό σου score είναι 10</h2>
+                            <p>Εδώ μπορείς να αφήσεις κάποιο σχόλιο σχετικά με την λειτουργία του συστήματος!</p>
+                            <form id="feedback-form" class="ui form" action="/as">
+                                <div class="field">
+                                    <textarea id="feedback" type="text" name="cmd" rows="5"></textarea>
+                                </div>                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="login-button-area">
+            <button type="submit" class="ui primary button" form="feedback-form">Συνέχεια</button>
+        </div>
+
+        <div class="simple-margin">&nbsp</div>
+
+        <!-- /container -->
+    </div>
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Semantic core JavaScript-->
+    <script src="assets/js/semantic.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

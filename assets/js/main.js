@@ -1,4 +1,4 @@
-function reviewPage(){
+function reviewPage() {
 
     var seconds = 60;
     var secondsArea = document.getElementById('seconds-left');
@@ -12,14 +12,14 @@ function reviewPage(){
     var nextQuestionButton = document.getElementById('nextq-button');
     var submitButton = document.getElementById('submit-button');
 
-    nextQuestionButton.addEventListener("click",function(){
-        nextQuestionButton.style.display='none';
-        submitButton.style.display='inherit';
-        questionHeader.innerHTML= 2;
-        questionOneDescription.style.display='none';
-        questionTwoDescription.style.display='inherit';
-        questionOneAnswer.style.display='none';
-        questionTwoAnswer.style.display='inherit';
+    nextQuestionButton.addEventListener("click", function () {
+        nextQuestionButton.style.display = 'none';
+        submitButton.style.display = 'inherit';
+        questionHeader.innerHTML = 2;
+        questionOneDescription.style.display = 'none';
+        questionTwoDescription.style.display = 'inherit';
+        questionOneAnswer.style.display = 'none';
+        questionTwoAnswer.style.display = 'inherit';
     });
 
     var reviewTimer = setInterval(function () {
@@ -30,5 +30,47 @@ function reviewPage(){
             window.history.back();
         }
     }, 1000);
+
+}
+
+function practiceHelpPage() {
+    var helpArea = document.getElementById('help-text');
+    var helpButton = document.getElementById('help-button');
+    var form = document.getElementById('main-form');
+    var answerField = document.getElementById('answer');
+    var i = 0;
+    var helps = arguments;
+
+    helpButton.addEventListener("click", function () {
+        helpArea.innerHTML = helps[i];
+        i++;
+        if (i >= helps.length) {
+            i = 0;
+        }
+    });
+
+    form.addEventListener("submit", function (e) {
+        var fixedValue = answerField.value.replace(/\s|\n/g, '');
+        answerField.value = fixedValue;
+    });
+
+
+}
+
+function practiceSchemaPage() {
+    console.log('We are in!!');
+    var $helpButton = $('#help-button');
+    var form = document.getElementById('main-form');
+    var answerField = document.getElementById('answer');
+
+    $helpButton.click(function () {
+        $('#schema-modal').modal('show');
+    });
+
+    form.addEventListener("submit", function (e) {
+        var fixedValue = answerField.value.replace(/\s|\n/g, '');
+        answerField.value = fixedValue;
+    });
+
 
 }

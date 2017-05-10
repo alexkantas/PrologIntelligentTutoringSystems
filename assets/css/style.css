@@ -70,6 +70,26 @@
      font-size: 1.5rem;
  }
 
+ .main-segment-description p{
+    margin-bottom: 0.5rem;
+ }
+
+ .sub-segment{
+    text-align: left;
+ }
+
+ .sub-segment .header{
+    margin-bottom: 0.5rem;
+ }
+
+ .question-paths-area{
+    margin-top: 1rem;
+ }
+
+.question-path-object{
+    height: 55vh;
+}
+
 
  .paths-area{
      margin-top: 3rem;
@@ -77,6 +97,14 @@
 
  .path-object{
      height: 70vh;
+ }
+
+ .practice-path-object{
+     height: 88vh;
+ }
+
+ .practice-schema-object{
+     height: 50rem;
  }
 
  .path-content{
@@ -87,8 +115,65 @@
      line-height: 2rem;
  }
 
+ .question-path-content{
+    max-height: 80%;
+}
+
+.answer{
+    height: 10vh;
+}
+
+#modal-text{
+    font-size: 1.5rem;
+    overflow: auto;
+}
+
+#help-schema-area{
+    height: 30vh;
+    font-size: 0.7rem;
+    overflow: auto;
+    position: relative;
+}
+
+#help-area{
+    height: 15vh;
+    position: relative;
+}
+
+#help-text{
+    max-height: 15vh;
+    overflow-y: auto;
+}
+
+.help-button{
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+}
+
  .well-done-object{
      text-align: center;
+     overflow-y: auto;
+ }
+
+#select-form{
+    line-height: 2.5rem;
+}
+
+ .practice-select-object{
+     overflow-y: auto;
+ }
+ 
+ .big-font{
+    font-size: 1.5rem !important;
+ }
+
+ .results-object p{
+     font-size: 1.5rem;
+ }
+
+ .complete-object{
+     height: 80vh;
  }
 
 .simple-margin{
@@ -111,6 +196,10 @@
     margin-top: 0.5rem !important;
 }
 
+.feedback-object{
+    height: 60vh;
+}
+
 .timer-element{
     width: 60% ;
     position: absolute ;
@@ -123,6 +212,10 @@
     width: 100%;
     height: 100%;
 }
+
+.text-center{
+     text-align: center
+ }
 
 @media only screen and (min-width: 768px){
     
