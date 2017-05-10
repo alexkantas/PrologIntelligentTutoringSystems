@@ -7,7 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+    <title>{{= title }}</title>
 
     <!-- Semantic core CSS -->
     <link href="assets/css/semantic.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
         <div class="main-segment">
             <div class="ui segment">
-                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
+                <div class="ui huge header">{{= title }}</div>
                 <div class="main-segment-description">
                 </div>
             </div>
@@ -37,11 +37,19 @@
                             <h1>Τέλος Μαθήματος</h1>
                         </div>
                         <div class="ui brown segment well-done-object complete-object">
-                            <h2>Το score σου είναι 10 !!!</h2>
+                            {{ if totalScore>=5 }}
+                            <h2>Το score σου είναι {{= totalScore }} !!!</h2>
                             <h3>Μπράβο ολοκλήρωσες το μάθημα με επιτυχία! Μπορείς να προχωρήσεις στο επόμενο!!!</h3>
                             <div class="ui raised segment feedback-object">
                                 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU_QZNZNgqaMgefawDHiM_XCcNfScWvE8mLR3QVGD5PXWorQ/viewform?embedded=true" class="full-width-height"></iframe>
                             </div>
+                            {{ else }}
+                            <h2>Το score σου είναι {{= totalScore }}.</h2>
+                            <h3>Δεν ολοκλήρωσες το μάθημα με επιτυχία. Προσπάθησε πάλι!</h3>
+                            <div class="ui raised segment feedback-object">
+                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScU_QZNZNgqaMgefawDHiM_XCcNfScWvE8mLR3QVGD5PXWorQ/viewform?embedded=true" class="full-width-height"></iframe>
+                            </div>
+                            {{ end }}
                         </div>
                     </div>
                 </div>

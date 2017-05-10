@@ -7,7 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+    <title>{{= title }}</title>
 
     <!-- Semantic core CSS -->
     <link href="assets/css/semantic.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
         <div class="main-segment">
             <div class="ui segment">
-                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
+                <div class="ui huge header">{{= title }}</div>
                 <div class="main-segment-description">
                 </div>
             </div>
@@ -38,13 +38,13 @@
                         </div>
                         <div class="ui brown segment path-object well-done-object results-object">
 
-                            <p>Το score σου στην πρώτη άσκηση είναι 4.</p>
-                            <p>Το score σου στην δεύτερη άσκηση είναι 6.</p>
-                            <p>Η σωστή απάντηση για την πρώτη άσκηση είναι 'occurrences(L, X, N).'</p>
-                            <p>Η σωστή απάντηση για την δεύτερη άσκηση είναι 'Lisa(L, X, N).'</p>
-                            <h2>Τελικό σου score είναι 10</h2>
+                            <p>Το score σου στην πρώτη άσκηση είναι {{= score1 }}.</p>
+                            <p>Το score σου στην δεύτερη άσκηση είναι {{= score2 }}.</p>
+                            <p>Η σωστή απάντηση για την πρώτη άσκηση είναι {{= ans1 }}</p>
+                            <p>Η σωστή απάντηση για την δεύτερη άσκηση είναι {{= ans2 }}</p>
+                            <h2>Τελικό σου score είναι {{= totalScore }}</h2>
                             <p>Εδώ μπορείς να αφήσεις κάποιο σχόλιο σχετικά με την λειτουργία του συστήματος!</p>
-                            <form id="feedback-form" class="ui form" action="/as">
+                            <form id="feedback-form" class="ui form" action="/complete" method="POST">
                                 <div class="field">
                                     <textarea id="feedback" type="text" name="cmd" rows="5"></textarea>
                                 </div>                                
