@@ -99,6 +99,10 @@
      height: 70vh;
  }
 
+ .practice-path-object{
+     height: 88vh;
+ }
+
  .path-content{
      margin-top: 0.7rem;
      overflow-y: auto;
@@ -109,6 +113,26 @@
 
  .question-path-content{
     max-height: 80%;
+}
+
+.answer{
+    height: 10vh;
+}
+
+#help-area{
+    height: 15vh;
+    position: relative;
+}
+
+#help-text{
+    max-height: 15vh;
+    overflow-y: auto;
+}
+
+.help-button{
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
 }
 
  .well-done-object{
