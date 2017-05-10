@@ -70,6 +70,26 @@
      font-size: 1.5rem;
  }
 
+ .main-segment-description p{
+    margin-bottom: 0.5rem;
+ }
+
+ .sub-segment{
+    text-align: left;
+ }
+
+ .sub-segment .header{
+    margin-bottom: 0.5rem;
+ }
+
+ .question-paths-area{
+    margin-top: 1rem;
+ }
+
+.question-path-object{
+    height: 55vh;
+}
+
 
  .paths-area{
      margin-top: 3rem;
@@ -87,6 +107,10 @@
      line-height: 2rem;
  }
 
+ .question-path-content{
+    max-height: 80%;
+}
+
  .well-done-object{
      text-align: center;
  }
@@ -102,6 +126,9 @@
 
 .review-text{
     font-size: 1.2rem;
+	max-height: 40%;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 .question-button{
