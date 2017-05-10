@@ -56,3 +56,21 @@ function practiceHelpPage() {
 
 
 }
+
+function practiceSchemaPage() {
+    console.log('We are in!!');
+    var $helpButton = $('#help-button');
+    var form = document.getElementById('main-form');
+    var answerField = document.getElementById('answer');
+
+    $helpButton.click(function () {
+        $('#schema-modal').modal('show');
+    });
+
+    form.addEventListener("submit", function (e) {
+        var fixedValue = answerField.value.replace(/\s|\n/g, '');
+        answerField.value = fixedValue;
+    });
+
+
+}

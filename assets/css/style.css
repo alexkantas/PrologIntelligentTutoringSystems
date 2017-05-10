@@ -103,6 +103,10 @@
      height: 88vh;
  }
 
+ .practice-schema-object{
+     height: 50rem;
+ }
+
  .path-content{
      margin-top: 0.7rem;
      overflow-y: auto;
@@ -117,6 +121,18 @@
 
 .answer{
     height: 10vh;
+}
+
+#modal-text{
+    font-size: 1.5rem;
+    overflow: auto;
+}
+
+#help-schema-area{
+    height: 30vh;
+    font-size: 0.6rem;
+    overflow: auto;
+    position: relative;
 }
 
 #help-area{
@@ -138,6 +154,18 @@
  .well-done-object{
      text-align: center;
      overflow-y: auto;
+ }
+
+#select-form{
+    line-height: 2.5rem;
+}
+
+ .practice-select-object{
+     overflow-y: auto;
+ }
+ 
+ .big-font{
+    font-size: 1.5rem !important;
  }
 
  .results-object p{
