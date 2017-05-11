@@ -208,6 +208,14 @@
     text-align: center ;
 }
 
+.lecture-element{
+    height: 90vh;
+}
+
+#submit-lecture-button{
+    padding: 2rem;
+}
+
 .full-width-height{
     width: 100%;
     height: 100%;

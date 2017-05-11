@@ -45,6 +45,10 @@ http:location(files, '/assets', []).
 :- http_handler(root(practisePrl),practise_prl,[]).
 :- http_handler(root(practiceAnswer),pr_answer_page,[]).
 :- http_handler(root(practiseComplete),practise_end,[]).
+:- http_handler(root(lecture),lecture,[]).
+:- http_handler(root(lectureAns),lect_answer,[]).
+:- http_handler(root(lectureRes),lect_answer_page,[]).
+:- http_handler(root(lectureCo),lectureCo,[]).
 
 /*  Το κατηγόρημα checkUserPwd(UserId, PWD) είναι αληθές  εαν  
 UserId είναι το όνομα χρήστης και PWD είναι ο κωδικός χρήστη.
@@ -97,6 +101,8 @@ start_lesson(UserId,PWD) :-
 		courseSelection(UserId, LessId, LessonType,NLessId) ,
 		clause(kb_lesson(NLessId,[LectureId,PracticeId,AssesmentId],Goal),B),
 		http_session_assert(practice_id(PracticeId)),
+		http_session_assert(goal(Goal)),
+		http_session_assert(theory('theory1')),
 		current_output(Out),
 		st_render_file(views/welcome, _{
 			title: 'Prolog Intelligent Tutoring Systems',
@@ -210,6 +216,74 @@ pr_answer_page(Request):-
 	
 practise_end(Request) :-
 	success("Πρακτική").
+	
+lecture(Request) :-
+	less_id(LessId),
+	goal(Goal),
+	theory(Theory),
+	setof([ThId,ExId,AnsId], kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId])^kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId]),
+				 AllThIdsList),
+		L_ex=ExId,
+	setof(ThId, kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId])^kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId]),AllThId),
+	AllThId=[ThId1|ThId2],
+	ThId2=[H],
+	A=[ExId1|ExId2],
+	ExId2=[E],
+	C=[AnsId1|AnsId2],
+	AnsId2=[T],
+	clause(kb_lesson_lecture(LessId,LctId,ThId1,ExId,[TypeEx,AnsId]),V), 
+	clause(kb_theory_lecture(ThId1,Text1),B1),
+	clause(kb_theory_lecture(H,Text2),B5),
+	clause(kb_exersise_lecture(ExId,Text_ex),B2),
+	clause(kb_answer_lecture(AnsId,Text_ans),K),
+	clause(kb_stoxoi(Goal,G_Text),O),
+	http_session_retractall(ex_id(X)),
+	http_session_assert(ex_id(ExId)),
+	http_session_retractall(ex_id2(X)),
+	http_session_assert(ex_id2(E)),
+	http_session_retractall(ans_id(X)),
+	http_session_assert(ans_id(AnsId)),
+	format('Content-type: text/html~n~n'),
+			current_output(Out),
+			st_render_file(views/lecture, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			goal: G_Text,
+			lesson: LessId,
+			theoryText1: Text1,
+			theoryText2: Text2,
+			theory: Theory
+			}, Out, []).
+			
+lect_answer(Request) :-
+		ex_id(ExId),
+		clause(kb_exersise_lecture(ExId,Text_ex),B2),
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+			st_render_file(views/lectureAns, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			question: Text_ex
+			}, Out, []).
+			
+lect_answer_page(Request) :-
+	http_parameters(Request,[ ans(Ans_ex,[])]),
+	ans_id(AnsId),
+	clause(kb_answer_lecture(AnsId,Text_ans),K),
+	((Ans_ex=Text_ans,
+		wellDone("/lectureCo"),
+		Cor_Ans is 1,
+		New_corr_ans= Cor_Ans +1);
+		(niceTry("/lectureCo",Text_ans))).
+		
+lectureCo(Request) :-
+	theory(Theory),
+	((Theory='theory2',
+		http_session_retractall(theory(X)),
+		http_session_assert(theory('theory1')),
+		success("Εισήγηση"));
+		(http_session_retractall(theory(X)),
+		http_session_assert(theory('theory2')),
+		lecture(Request))).
+
 
 lessons(UserId,Lesson,LessId,LessonType) :- 
         ((clause(student(UserId,PersDetails),Body1),UserType = old);
@@ -329,6 +403,10 @@ logMessage(Message):-
 		http_session_retractall(ass_id(X)),
 		http_session_retractall(practice_id(X)),
 		http_session_retractall(total_score(X)),
+		http_session_retractall(theory(X)),
+		http_session_retractall(ex_id(X)),
+		http_session_retractall(ex_id2(X)),
+		http_session_retractall(ans_id(X)),
 		format('Content-type: text/html~n~n'),
 		current_output(Out),
 		st_render_file(views/logIn, _{
@@ -351,6 +429,21 @@ practice_id(PraId) :-
 	
 total_score(TotalScore):-
 	http_session_data(total_score(TotalScore)),!.
+	
+theory(Theory):-
+	http_session_data(theory(Theory)),!.
+	
+goal(Goal):-
+	http_session_data(goal(Goal)),!.
+	
+ex_id(ExId):-
+	http_session_data(ex_id(ExId)),!.
+	
+ex_id2(ExId2):-
+	http_session_data(ex_id2(ExId2)),!.
+	
+ans_id(AnsId):-
+	http_session_data(ans_id(AnsId)),!.
 
 last1(X, [X]).
 last1(X, [ Head | Tail] ):- last1(X,Tail).
