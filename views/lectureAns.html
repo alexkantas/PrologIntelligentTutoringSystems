@@ -40,7 +40,7 @@
 
                             <h2>{{= question }}</h2>
                             <p>Δώσε μια απάντηση στο παρακάτω πλαίσιο και πάτα το 'Αποστολή'</p>
-                            <form id="lecture-form" class="ui form" action="/lectureRes">
+                            <form id="lecture-form" class="ui form" action="/lectureRes" method="POST">
                                 <div class="field">
                                     <textarea id="ans" type="text" name="ans" rows="3" required></textarea>
                                 </div>
@@ -65,6 +65,10 @@
 
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
+
+    <script>
+        lecturePage()
+    </script>
 
 </body>
 

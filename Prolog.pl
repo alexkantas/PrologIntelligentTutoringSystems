@@ -222,16 +222,18 @@ lecture(Request) :-
 	goal(Goal),
 	theory(Theory),
 	setof([ThId,ExId,AnsId], kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId])^kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId]),
-				 AllThIdsList),
-		L_ex=ExId,
+             AllThIdsList),
+	L_ex=ExId,
 	setof(ThId, kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId])^kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId]),AllThId),
+	setof(ExId, kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId])^kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId]),A),
+	setof(AnsId, kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId])^kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId]),C),
 	AllThId=[ThId1|ThId2],
 	ThId2=[H],
 	A=[ExId1|ExId2],
 	ExId2=[E],
 	C=[AnsId1|AnsId2],
 	AnsId2=[T],
-	clause(kb_lesson_lecture(LessId,LctId,ThId1,ExId,[TypeEx,AnsId]),V), 
+	clause(kb_lesson_lecture(LessId,LctId,ThId,ExId,[TypeEx,AnsId]),V), 
 	clause(kb_theory_lecture(ThId1,Text1),B1),
 	clause(kb_theory_lecture(H,Text2),B5),
 	clause(kb_exersise_lecture(ExId,Text_ex),B2),
@@ -243,6 +245,8 @@ lecture(Request) :-
 	http_session_assert(ex_id2(E)),
 	http_session_retractall(ans_id(X)),
 	http_session_assert(ans_id(AnsId)),
+	http_session_retractall(ans_id2(X)),
+	http_session_assert(ans_id2(T)),
 	format('Content-type: text/html~n~n'),
 			current_output(Out),
 			st_render_file(views/lecture, _{
@@ -255,24 +259,47 @@ lecture(Request) :-
 			}, Out, []).
 			
 lect_answer(Request) :-
+		theory(Theory),
 		ex_id(ExId),
-		clause(kb_exersise_lecture(ExId,Text_ex),B2),
+		ex_id2(ExId2),
+		((Theory='theory2',
+		clause(kb_exersise_lecture(ExId2,Text_ex),B2),
 		format('Content-type: text/html~n~n'),
 		current_output(Out),
 			st_render_file(views/lectureAns, _{
 			title: 'Prolog Intelligent Tutoring Systems',
 			question: Text_ex
-			}, Out, []).
+			}, Out, []));
+		(clause(kb_exersise_lecture(ExId,Text_ex),B2),
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+			st_render_file(views/lectureAns, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			question: Text_ex
+			}, Out, []))).	
 			
 lect_answer_page(Request) :-
 	http_parameters(Request,[ ans(Ans_ex,[])]),
+	theory(Theory),
 	ans_id(AnsId),
-	clause(kb_answer_lecture(AnsId,Text_ans),K),
-	((Ans_ex=Text_ans,
+	ans_id2(AnsId2),
+	((Theory='theory2',
+		clause(kb_answer_lecture(AnsId2,Text_ans),K),
+		((Ans_ex=Text_ans,
 		wellDone("/lectureCo"),
 		Cor_Ans is 1,
 		New_corr_ans= Cor_Ans +1);
-		(niceTry("/lectureCo",Text_ans))).
+		(niceTry("/lectureCo",Text_ans)))
+		);
+		(
+		clause(kb_answer_lecture(AnsId,Text_ans),K),
+		((Ans_ex=Text_ans,
+		wellDone("/lectureCo"),
+		Cor_Ans is 1,
+		New_corr_ans= Cor_Ans +1);
+		(niceTry("/lectureCo",Text_ans)))
+		)).
+		
 		
 lectureCo(Request) :-
 	theory(Theory),
@@ -407,6 +434,7 @@ logMessage(Message):-
 		http_session_retractall(ex_id(X)),
 		http_session_retractall(ex_id2(X)),
 		http_session_retractall(ans_id(X)),
+		http_session_retractall(ans_id2(X)),
 		format('Content-type: text/html~n~n'),
 		current_output(Out),
 		st_render_file(views/logIn, _{
@@ -444,6 +472,9 @@ ex_id2(ExId2):-
 	
 ans_id(AnsId):-
 	http_session_data(ans_id(AnsId)),!.
+
+ans_id2(AnsId2):-
+	http_session_data(ans_id2(AnsId2)),!.
 
 last1(X, [X]).
 last1(X, [ Head | Tail] ):- last1(X,Tail).

@@ -58,7 +58,6 @@ function practiceHelpPage() {
 }
 
 function practiceSchemaPage() {
-    console.log('We are in!!');
     var $helpButton = $('#help-button');
     var form = document.getElementById('main-form');
     var answerField = document.getElementById('answer');
@@ -69,6 +68,17 @@ function practiceSchemaPage() {
 
     form.addEventListener("submit", function (e) {
         var fixedValue = answerField.value.replace(/\s|\n/g, '');
+        answerField.value = fixedValue;
+    });
+
+
+}
+
+function lecturePage() {
+    var form = document.getElementById('lecture-form');
+    var answerField = document.getElementById('ans');
+    form.addEventListener("submit", function (e) {
+        var fixedValue = answerField.value.trim();
         answerField.value = fixedValue;
     });
 
