@@ -7,7 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+    <title>{{= title }}</title>
 
     <!-- Semantic core CSS -->
     <link href="assets/css/semantic.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
         <div class="main-segment">
             <div class="ui segment">
-                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
+                <div class="ui huge header">{{= title }}</div>
                 <div class="main-segment-description text container">
                     <p>Υπάρχουν 3 τρόποι με τους οποίους μπορείς να φτάσεις στην λύση της άσκησης.</p>                    </p>
                     <p>Διάλεξε έναν από τους 3, όποιος είναι καλύτερος για εσένα!</p>
@@ -34,15 +34,14 @@
             <div class="ui brown segment sub-segment">
                 <div class="ui huge header">Ερώτηση</div>
                 <div class="main-segment-description">
-                    <p>Να φτιάξετε ένα κατηγόρημα deleteAll το οπoίο θα σβήνει όλες τις εμφανίσεις των στοιχείων X από τη λίστα
-                        List1, δημιουργώντας τη λίστα List2.</p>
+                    <p>{{= question }}</p>
                 </div>
             </div>
             <div class="ui three column stackable grid">
 
                 <div class="column">
                     <div class="ui segment question-path-object">
-                        <a class="ui brown ribbon label">
+                        <a href="/practiceSbS" class="ui brown ribbon label">
                             <h2>Step by Step</h2>
                         </a>
                         <div class="path-content question-path-content">
@@ -57,7 +56,7 @@
 
                 <div class="column">
                     <div class="ui segment question-path-object">
-                        <a class="ui brown ribbon label">
+                        <a href="/practiseSchema" class="ui brown ribbon label">
                             <h2>Schema</h2>
                         </a>
                         <div class="path-content question-path-content">
@@ -71,7 +70,7 @@
 
                 <div class="column">
                     <div class="ui segment question-path-object">
-                        <a class="ui brown ribbon label">
+                        <a href="/practisePrl" class="ui brown ribbon label">
                             <h2>Prolog</h2>
                         </a>
                         <div class="path-content question-path-content">

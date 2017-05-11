@@ -39,6 +39,12 @@ http:location(files, '/assets', []).
 :- http_handler(root(results),results,[]).
 :- http_handler(root(complete),assesment_end,[]).
 :- http_handler(root(practice),practise,[]).
+:- http_handler(root(practiceSbS),practise_sbs,[]).
+:- http_handler(root(practiseSchema),practise_schema,[]).
+:- http_handler(root(practiseSchemaShow),practise_schema_prnt,[]).
+:- http_handler(root(practisePrl),practise_prl,[]).
+:- http_handler(root(practiceAnswer),pr_answer_page,[]).
+:- http_handler(root(practiseComplete),practise_end,[]).
 
 /*  Το κατηγόρημα checkUserPwd(UserId, PWD) είναι αληθές  εαν  
 UserId είναι το όνομα χρήστης και PWD είναι ο κωδικός χρήστη.
@@ -88,6 +94,9 @@ start_lesson(UserId,PWD) :-
 		courseSelection(UserId, LessId, LessonType,NLessId) ,
 		clause(kb_lesson(NLessId,[LectureId,PracticeId,AssesmentId],Goal),B),
 		http_session_assert(ass_id(AssesmentId)),
+		courseSelection(UserId, LessId, LessonType,NLessId) ,
+		clause(kb_lesson(NLessId,[LectureId,PracticeId,AssesmentId],Goal),B),
+		http_session_assert(practice_id(PracticeId)),
 		current_output(Out),
 		st_render_file(views/welcome, _{
 			title: 'Prolog Intelligent Tutoring Systems',
@@ -110,19 +119,97 @@ selection(_Request) :-
 	   [h1('Ουπς! Παρουσιάστηκε κάποιο πρόβλημα!'),
 	    a(href='/logIn','Δοκίμασε να ξανασυνδεθείς!')]).
 		
-practice(_Request) :-
-		user_id(UserId),
+practise(_Request) :-
+		less_id(LessId),
+		practice_id(PraId),
+		clause(kb_lesson_practice(LessId,PraId,TypePractice,Pra_ExId,HelpId,AnsId,BibId),B1),
+		clause(kb_exersise_practice(Pra_ExId,Text_pr_ex),B2),
 		format('Content-type: text/html~n~n'),
 		current_output(Out),
 		st_render_file(views/practiceSelection, _{
-			title: 'Prolog Intelligent Tutoring Systems'
+			title: 'Prolog Intelligent Tutoring Systems',
+			question: Text_pr_ex
 		}, Out, []).
 
-practice(_Request) :-
+practise(_Request) :-
 	reply_html_page(
 	   [title('Πρόβλημα :-(')],
 	   [h1('Ουπς! Παρουσιάστηκε κάποιο πρόβλημα!'),
 	    a(href='/logIn','Δοκίμασε να ξανασυνδεθείς!')]).
+		
+		
+practise_sbs(Request):-
+		less_id(LessId),
+		practice_id(PraId),
+		clause(kb_lesson_practice(LessId,PraId,TypePractice,Pra_ExId,HelpId,AnsId,BibId),B1),
+		 clause(kb_exersise_practice(Pra_ExId,Text_pr_ex),B2),
+		 clause(kb_help_practice(HelpId,Help_Level1_Id,Help_Level2_Id,Help_Level3_Id),B3),
+		 setof(Help_Level1_Id, Text_help1^clause(kb_helpText_practice(HelpId,Help_Level1_Id,Text_help1),B4), L),
+		 L = [Help_Level1_Id, Help_Level2_Id, Help_Level3_Id],
+		 clause(kb_helpText_practice(HelpId,Help_Level1_Id,Text_help1),B5),	
+		 clause(kb_helpText_practice(HelpId,Help_Level2_Id,Text_help2),B6),	
+		 clause(kb_helpText_practice(HelpId,Help_Level3_Id,Text_help3),B7),
+		 clause(kb_answer_practice(AnsId,Text_ans),B7), 
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/practiceHelp, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			question: Text_pr_ex,
+			help1: Text_help1,
+			help2: Text_help2,
+			help3: Text_help3
+		}, Out, []).
+		
+practise_schema(Request):-
+		less_id(LessId),
+		practice_id(PraId),
+		clause(kb_lesson_practice(LessId,PraId,TypePractice,Pra_ExId,HelpId,AnsId,BibId),B1),
+		clause(kb_exersise_practice(Pra_ExId,Text_pr_ex),B2),
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/practiceSchemaSelect, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			question: Text_pr_ex
+		}, Out, []).
+		
+practise_schema_prnt(Request):-
+	less_id(LessId),
+	practice_id(PraId),
+	http_parameters(Request,[value(Value,[])]),
+	clause(kb_lesson_practice(LessId,PraId,TypePractice,Pra_ExId,HelpId,AnsId,BibId),B1),
+	clause(kb_exersise_practice(Pra_ExId,Text_pr_ex),B2),
+	consult('schema_base.pl'),
+	schema(Value,L),
+	format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/practiceSchema, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			question: Text_pr_ex,
+			schema: L
+		}, Out, []).
+		
+practise_prl(Request):-
+		less_id(LessId),
+		practice_id(PraId),
+		clause(kb_lesson_practice(LessId,PraId,TypePractice,Pra_ExId,HelpId,AnsId,BibId),B1),
+		clause(kb_exersise_practice(Pra_ExId,Text_pr_ex),B2),
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/practiceNoHelp, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			question: Text_pr_ex
+		}, Out, []).
+		
+pr_answer_page(Request):-
+	less_id(LessId),
+	practice_id(PraId),
+	http_parameters(Request,[ ans(Ans_ex,[])]),
+	clause(kb_lesson_practice(LessId,PraId,TypePractice,Pra_ExId,HelpId,AnsId,BibId),B1),
+	clause(kb_answer_practice(AnsId,Text_ans),B7),
+	(Ans_ex=Text_ans,wellDone("/practiseComplete"),Complete=yes;niceTry("/practiseComplete",Text_ans)).
+	
+practise_end(Request) :-
+	success("Πρακτική").
 
 lessons(UserId,Lesson,LessId,LessonType) :- 
         ((clause(student(UserId,PersDetails),Body1),UserType = old);
@@ -211,18 +298,36 @@ assesment_end(Request):-
 			}, Out, []).
 	
 	
-wellDone(Message):-
+wellDone(NextPage):-
 			format('Content-type: text/html~n~n'),
 			current_output(Out),
 			st_render_file(views/wellDone, _{
 			title: 'Prolog Intelligent Tutoring Systems',
-			message: Message
+			nextPage: NextPage
+			}, Out, []).
+			
+niceTry(NextPage,Answer):-
+			format('Content-type: text/html~n~n'),
+			current_output(Out),
+			st_render_file(views/niceTry, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			answer: Answer,
+			nextPage: NextPage
+			}, Out, []).
+			
+success(Name):-
+			format('Content-type: text/html~n~n'),
+			current_output(Out),
+			st_render_file(views/success, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			name: Name
 			}, Out, []).
 			
 logMessage(Message):-
+		http_session_retractall(user_id(X)),
 		http_session_retractall(less_id(X)),
 		http_session_retractall(ass_id(X)),
-		http_session_retractall(user_id(X)),
+		http_session_retractall(practice_id(X)),
 		http_session_retractall(total_score(X)),
 		format('Content-type: text/html~n~n'),
 		current_output(Out),
@@ -240,6 +345,9 @@ less_id(LessId) :-
 
 ass_id(AssId) :-
 	http_session_data(ass_id(AssId)),!.
+	
+practice_id(PraId) :-
+	http_session_data(practice_id(PraId)),!.
 	
 total_score(TotalScore):-
 	http_session_data(total_score(TotalScore)),!.

@@ -7,7 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+    <title>{{= title }}</title>
 
     <!-- Semantic core CSS -->
     <link href="assets/css/semantic.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
         <div class="main-segment">
             <div class="ui segment">
-                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
+                <div class="ui huge header">{{= title }}</div>
                 <div class="main-segment-description">
                     <p>Στο δεξί μέρος της σελίδας υπάρχει το περιβάλλον εργασίας στο οποίο θα ελέγχεται το λειτουργικό κομμάτι
                         της άσκησης πριν την υποβάλλεται στο σύστημα στο πεδίο απάντηση!</p>
@@ -40,16 +40,17 @@
                             <h1 class="ui dividing header">Ερώτηση </h1>
 
                             <p id="question-1-description" class="review-text">
-                                Γράψετε κατηγόρημα occurrences(L, X, N) το οποίο είναι αληθές εάν Ν είναι το πλήθος των επαναλήψεων του στοιχείου Χ στην
-                                λίστα L.Η υλοποίηση να γίνει με την τεχνική κατασκευής δομής στη κεφαλή της πρότασης.
+                                {{= question }}
                             </p>
 
-                            <p id="question-2-description" class="review-text" style='display:none'>
-                                Γράψετε κατηγόρημα occurrences(L, X, N) το οποίο είναι αληθές εάν Ν είναι το πλήθος των επαναλήψεων του στοιχείου Χ στην
-                                λίστα L.Η υλοποίηση να γίνει με την τεχνική κατασκευής δομής στη κεφαλή της πρότασης.
-                            </p>
+                            <div class="ui raised segment">
+                                <div id="help-area">
+                                    <p id="help-text"></p>
+                                    <button id="help-button" class="ui basic green icon button help-button"><i class="large grey life ring icon"></i></button>
+                                </div>
+                            </div>
 
-                            <form id="main-form" class="ui form" action="/result">
+                            <form id="main-form" class="ui form" action="/practiceAnswer" method="POST">
                                 <div class="field">
                                     <label>Απάντηση</label>
                                     <textarea id="answer" type="text" name="ans" rows="2" required></textarea>
@@ -85,7 +86,7 @@
     <script src="assets/js/main.js"></script>
 
     <script>
-        practiceHelpPage();
+        practiceHelpPage("{{= help1 }}","{{= help2 }}","{{= help3 }}")
     </script>
 
 </body>

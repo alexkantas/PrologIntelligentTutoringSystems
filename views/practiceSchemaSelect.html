@@ -7,7 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+    <title>{{= title }}</title>
 
     <!-- Semantic core CSS -->
     <link href="assets/css/semantic.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
         <div class="main-segment">
             <div class="ui segment">
-                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
+                <div class="ui huge header">{{= title }}</div>
                 <div class="main-segment-description">
                 </div>
             </div>
@@ -38,25 +38,23 @@
                         </div>
                         <div class="ui brown segment path-object practice-select-object results-object">
                             <div class="ui segment">
-                                <p>'Να φτιάξετε ένα κατηγόρημα deleteAll το οπίο θα σβήνει όλες τις εμφανίσεις των στοιχείων
-                                    X από τη λίστα List1,δημιουργώντας τη λίστα List2. Στο πεδίο της απάντησης δώσε τη δεύτερη
-                                    περίπτωση σύμφωνα με το σχήμα.'</p>
+                                <p>{{= question }}</p>
                             </div>
                             <p>Παρακάτω θα δείτε τη λίστα με τα σχήματα που παρέχει το σύστημα.</p>
                             <p>Εσείς θα επιλέξετε κάποιο σχήμα το οποίο θα σας βοηθήσει στην υλοποίηση της άσκησης.</p>
                             
-                            <form id="select-form" class="ui form" action="/super">
+                            <form id="select-form" class="ui form" action="/practiseSchemaShow" method="POST">
                                 <div class="grouped fields">
                                     <label class="big-font">Επιλέξετε σχήμα</label>
                                     <div class="field">
                                         <div class="ui radio checkbox">
-                                            <input type="radio" name="ans" value="a">
+                                            <input type="radio" name="value" value="t1">
                                             <label class="big-font">Κατασκευή δομής στην κεφαλή μιας πρότασης.</label>
                                         </div>
                                     </div>
                                     <div class="field">
                                         <div class="ui radio checkbox">
-                                            <input type="radio" name="ans" value="b">
+                                            <input type="radio" name="value" value="t2">
                                             <label class="big-font">Κατασκευή δομής στο σώμα μιας πρότασης στην αναδρομή.</label>
                                         </div>
                                     </div>
