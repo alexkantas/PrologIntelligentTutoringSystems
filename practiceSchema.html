@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Alex Kantas">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+
+    <title>Prolog Intelligent Tutoring Systems (PITS)</title>
+
+    <!-- Semantic core CSS -->
+    <link href="assets/css/semantic.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="main-background">
+
+
+    <div id="schema-modal" class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Σχήμα
+        </div>
+        <div class="content">
+            <div id="modal-text" class="description">
+                <b>Κατηγόρημα(<k style="color:blue;">ΔομήΕλέγχου,ΤελικήΚατασκευασμενηΔομής</k>) :- <br> <x style="color:white;">___</x><u>ΝέοΚατηγόρημα</u>(<k style="color:blue;">ΔομήΕλέγχου</k>,<k style="color:red;">ΒάσηΚατασκευαζόμενηςΔομής</k>,<br><x style="color:white;">____________________________</x><k style="color:#00FF00;">ΤελικήΚατασκευαζόμενηΔομή</k>). ΝέοΚατηγόρημα(<k style="color:blue;">ΒάσηΔομήΕλέγχου</k>,<k style="color:red;">ΚατασκευαζόμενοΜέροςΔομής  </k><x style="color:white;">__________________________</x> ,<k style="color:#00FF00;">ΤελικήΚατασκευασμένηΔομή</k>):- <br><u>Κατασκευή</u> (<k style="color:red;">ΚατασκευαζόμενοΜέροςΔομής, </k><k style="color:magenta;"><x style="color:white;">___________</x>ΝεοΚατασκευαζόμενοΜέροςΔομής</x></k>),<br> <u>ΝέοΚατηγορημα</u>(<m style="color:blue;">ΜικροτερηΔομήΕλέγχου</m>,<m style="color:magenta;"> <x style="color:white;">______________</x>ΝεοΚατασκευαζόμενοΜέροςΔομής</m>,<m style="color:#00FF00;"> <x style="color:white;">______________</x>ΤελικήΚατασκευασμένηΔομή)</m>.</b>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui positive right labeled icon button">
+                Ok
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui container">
+
+        <div class="main-segment">
+            <div class="ui segment">
+                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
+                <div class="main-segment-description">
+                    <p>Στο δεξί μέρος της σελίδας υπάρχει το περιβάλλον εργασίας στο οποίο θα ελέγχεται το λειτουργικό κομμάτι
+                        της άσκησης πριν την υποβάλλεται στο σύστημα στο πεδίο απάντηση!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="paths-area">
+            <div class="ui stackable grid">
+
+                <div class="six wide column">
+                    <div class="ui segment practice-schema-object">
+                        <div class="full-width-height practice-object">
+
+                            <h1 class="ui dividing header">Ερώτηση </h1>
+
+                            <p id="question-1-description" class="review-text">
+                                Γράψετε κατηγόρημα occurrences(L, X, N) το οποίο είναι αληθές εάν Ν είναι το πλήθος των επαναλήψεων του στοιχείου Χ στην
+                                λίστα L.Η υλοποίηση να γίνει με την τεχνική κατασκευής δομής στη κεφαλή της πρότασης.
+                            </p>
+
+                            <p id="question-2-description" class="review-text" style='display:none'>
+                                Γράψετε κατηγόρημα occurrences(L, X, N) το οποίο είναι αληθές εάν Ν είναι το πλήθος των επαναλήψεων του στοιχείου Χ στην
+                                λίστα L.Η υλοποίηση να γίνει με την τεχνική κατασκευής δομής στη κεφαλή της πρότασης.
+                            </p>
+
+                            <p class="review-text">Το σχήμα που επέλεξες είναι το παρακάτω:</p>
+
+                            <div class="ui raised segment">
+                                <div id="help-schema-area">
+                                    <b>Κατηγόρημα(<k style="color:blue;">ΔομήΕλέγχου,ΤελικήΚατασκευασμενηΔομής</k>) :- <br> <x style="color:white;">___</x><u>ΝέοΚατηγόρημα</u>(<k style="color:blue;">ΔομήΕλέγχου</k>,<k style="color:red;">ΒάσηΚατασκευαζόμενηςΔομής</k>,<br><x style="color:white;">____________________________</x><k style="color:#00FF00;">ΤελικήΚατασκευαζόμενηΔομή</k>). ΝέοΚατηγόρημα(<k style="color:blue;">ΒάσηΔομήΕλέγχου</k>,<k style="color:red;">ΚατασκευαζόμενοΜέροςΔομής  </k><x style="color:white;">__________________________</x> ,<k style="color:#00FF00;">ΤελικήΚατασκευασμένηΔομή</k>):- <br><u>Κατασκευή</u> (<k style="color:red;">ΚατασκευαζόμενοΜέροςΔομής, </k><k style="color:magenta;"><x style="color:white;">___________</x>ΝεοΚατασκευαζόμενοΜέροςΔομής</x></k>),<br> <u>ΝέοΚατηγορημα</u>(<m style="color:blue;">ΜικροτερηΔομήΕλέγχου</m>,<m style="color:magenta;"> <x style="color:white;">______________</x>ΝεοΚατασκευαζόμενοΜέροςΔομής</m>,<m style="color:#00FF00;"> <x style="color:white;">______________</x>ΤελικήΚατασκευασμένηΔομή)</m>.</b>
+                                    <button id="help-button" class="ui basic blue icon button help-button"><i class="large grey zoom icon"></i></button>
+                                </div>
+                            </div>
+
+                            <form id="main-form" class="ui form" action="/result">
+                                <div class="field">
+                                    <label>Απάντηση</label>
+                                    <textarea id="answer" type="text" name="ans" rows="2" required></textarea>
+                                </div>
+                                <button id="submit-button" class="ui blue right floated submit button" type="submit">Αποστολή</button>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ten wide column">
+                    <div class="ui segment practice-schema-object">
+                        <iframe src="http://swish.swi-prolog.org/" id="prolog-site" class="full-width-height"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="simple-margin">&nbsp</div>
+
+        <!-- /container -->
+    </div>
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Semantic core JavaScript-->
+    <script src="assets/js/semantic.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        practiceSchemaPage();
+    </script>
+
+</body>
+
+</html>
