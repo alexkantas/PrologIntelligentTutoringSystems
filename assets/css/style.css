@@ -216,9 +216,45 @@
     padding: 2rem;
 }
 
+.users-show{
+    width: 100%;
+    height: 24rem;
+    overflow-y: auto;
+}
+
+.users-list-show{
+    width: 100%;
+    height: 50vh;
+    overflow-y: auto;
+}
+
+.center-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.student-list{
+    list-style: none;
+    padding: 0;
+}
+
+.student-element{
+    margin-bottom: 1rem;
+}
+
+.student-card{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 .full-width-height{
     width: 100%;
     height: 100%;
+}
+
+.capitalized-text{
+   text-transform: capitalize; 
 }
 
 .text-center{
@@ -238,6 +274,14 @@
 
     .start-question-block{
         width: 50%;
+    }
+
+}
+
+@media only screen and (max-width: 990px){
+    
+    .teacher-bar{
+    width: 100% !important;
     }
 
 } 

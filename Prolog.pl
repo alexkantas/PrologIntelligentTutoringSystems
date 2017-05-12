@@ -12,6 +12,8 @@
 % module for sessions
 :- use_module(library(http/http_session)).
 
+:- use_module(library(http/http_json)).
+
 :- use_module(prolog/st/st_parse).
 :- use_module(prolog/st/st_render).
 :- use_module(prolog/st/st_file).
@@ -49,6 +51,13 @@ http:location(files, '/assets', []).
 :- http_handler(root(lectureAns),lect_answer,[]).
 :- http_handler(root(lectureRes),lect_answer_page,[]).
 :- http_handler(root(lectureCo),lectureCo,[]).
+:- http_handler(root(teacher),teacher,[]).
+:- http_handler(root(showUsers),show_user,[]).
+:- http_handler(root(showUsersInfo),captureInfo,[]).
+:- http_handler(root(showUserInfo),code,[]).
+:- http_handler(root(showInfo),info_pts,[]).
+:- http_handler(root(showFeedback),helpdesc,[]).
+:- http_handler(root(feedbackData),feedbackData,[]).
 
 /*  Το κατηγόρημα checkUserPwd(UserId, PWD) είναι αληθές  εαν  
 UserId είναι το όνομα χρήστης και PWD είναι ο κωδικός χρήστη.
@@ -58,7 +67,8 @@ checkUserPwd(std2, crete).*/
 checkUserPwd(UserId, PWD)  :- 
      (UserId = 'std1', PWD=kal);
 	 (UserId = 'std2', PWD=crete);
-	 (UserId = 'std3', PWD=athens).	
+	 (UserId = 'std3', PWD=athens);
+	 (UserId = 'tch', PWD=tch).
 
 server(Port) :-
         http_server(http_dispatch, [port(Port)]).
@@ -85,8 +95,161 @@ logout(Request) :-
 katigorima_parousiasi_apotelesmaton(Request):-
 http_parameters(Request,[ username(UserId, []),password(PWD, [])]),
 		   (checkUserPwd(UserId, PWD),
-		  ((start_lesson(UserId,PWD)));
+		   ((UserId=tch,PWD=tch,http_session_assert(user_id(UserId)),teacher(UserId));
+		  (start_lesson(UserId,PWD)));
 		   (logMessage(1))).
+		   
+teacher(Request) :-
+		user_id(UserId),
+		((UserId='tch',
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/teacherHome, _{
+			title: 'Prolog Intelligent Tutoring Systems'
+		}, Out, [])
+		);
+		(
+		fail
+		)).
+		
+teacher(Request) :-
+	failure(Request).
+
+show_user(Request) :-
+		user_id(UserId),
+		((UserId='tch',
+		clause(max_student_id(Number),Cilist),
+		bagof([Student_Id,[[Onoma,Epitheto],Tmima, AM]],clause(student(Student_Id, [[Onoma,Epitheto],Tmima, AM]),C1),L2),
+		 L2=[A,B,C|D],
+		 A=[Code1,[[On1,Ep1],Tm1,Id_am1]],
+		 B=[Code2,[[On2,Ep2],Tm2,Id_am2]],
+		 C=[Code3,[[On3,Ep3],Tm3,Id_am3]],
+		 D=[[Code4,[[On4,Ep4],Tm4,Id_am4]]],
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/teacherUsers, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			totalUsers: Number,
+			users: [
+			_{ name: On1, lastName: Ep1, code: Code1, department: Tm1, am: Id_am1},
+			_{ name: On2, lastName: Ep2, code: Code2, department: Tm2, am: Id_am2},
+			_{ name: On3, lastName: Ep3, code: Code3, department: Tm3, am: Id_am3},
+			_{ name: On4, lastName: Ep4, code: Code4, department: Tm4, am: Id_am4}
+		]
+		}, Out, [])
+		);
+		(
+		format('Content-type: text/html~n~n'),
+		format('Is ~p',[UserId])
+		)).
+		
+show_user(Request) :-
+	failure(Request).
+	
+captureInfo(Request) :-
+		user_id(UserId),
+		((UserId='tch',
+		bagof([Student_Id,[[Onoma,Epitheto],Tmima, AM]],clause(student(Student_Id, [[Onoma,Epitheto],Tmima, AM]),C1),L2),
+		 L2=[A,B,C|D],
+		 A=[Code1,[[On1,Ep1],Tm1,Id_am1]],
+		 B=[Code2,[[On2,Ep2],Tm2,Id_am2]],
+		 C=[Code3,[[On3,Ep3],Tm3,Id_am3]],
+		 D=[[Code4,[[On4,Ep4],Tm4,Id_am4]]],
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/teacherUsersProgress, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			users: [
+			_{ name: On1, lastName: Ep1, code: Code1, department: Tm1, am: Id_am1},
+			_{ name: On2, lastName: Ep2, code: Code2, department: Tm2, am: Id_am2},
+			_{ name: On3, lastName: Ep3, code: Code3, department: Tm3, am: Id_am3},
+			_{ name: On4, lastName: Ep4, code: Code4, department: Tm4, am: Id_am4}
+		]
+		}, Out, [])
+		);
+		(
+		fail
+		)).
+		
+captureInfo(Request) :-
+	failure(Request).
+	
+code(Request) :-
+		user_id(UserId),
+		((UserId='tch',
+		http_parameters(Request,[user(Epil,[])]),
+		clause(kb_course_stud(Epil,Linfo),Binfo),
+		last(Linfo,LastInfo),
+		LastInfo = [Lesson_Id, [Lecture_Id,Lect_values],[Practice_Id, Practice_Values],
+            	[Assessment_Id, Assessment_Values] ],
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/teacherInfoUser, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			lesson: Lesson_Id,
+			lectureProgress: Lect_values,
+			practiceProgress: Practice_Values,
+			reviewProgress: Assessment_Values
+		}, Out, [])
+		);
+		(
+		fail
+		)).
+		
+code(Request) :-
+	failure(Request).
+
+info_pts(Request) :-
+		user_id(UserId),
+		((UserId='tch',
+		bagof(Linfo, Student_Id^kb_course_stud(Student_Id,Linfo),L),
+		flatten1(L,L1),countPract(L1,X),
+		clause(max_student_id(N),V),
+		NN is N -1,
+		countLect(L1,Y),
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/teacherInfo, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			totalUsers: NN,
+			practiceCount: X,
+			lecturesCount: Y
+		}, Out, [])
+		);
+		(
+		fail
+		)).
+		
+info_pts(Request) :-
+	failure(Request).
+	
+	
+feedbackData(Request) :-
+		user_id(UserId),
+		((UserId='tch',
+		bagof(Text_hd,Hd_id^clause(kb_helpdesc(Hd_id,Text_hd),B),M),
+		reply_json(M)
+		);
+		(
+		reply_json("{{Παρουσιάστηκε κάποιο Πρόβλημα}}")
+		)).	
+		
+helpdesc(Request) :-
+		user_id(UserId),
+		((UserId='tch',
+		format('Content-type: text/html~n~n'),
+		current_output(Out),
+		st_render_file(views/teacherComments, _{
+			title: 'Prolog Intelligent Tutoring Systems',
+			comments: "[yliko,poly kalo,thelw perissotero yliko]"
+		}, Out, [])
+		);
+		(
+		fail
+		)).
+		
+helpdesc(Request) :-
+	failure(Request).
 	
 start_lesson(UserId,PWD) :-
 		format('Content-type: text/html~n~n'),
@@ -138,10 +301,7 @@ practise(_Request) :-
 		}, Out, []).
 
 practise(_Request) :-
-	reply_html_page(
-	   [title('Πρόβλημα :-(')],
-	   [h1('Ουπς! Παρουσιάστηκε κάποιο πρόβλημα!'),
-	    a(href='/logIn','Δοκίμασε να ξανασυνδεθείς!')]).
+	failure(_Request).
 		
 		
 practise_sbs(Request):-
@@ -397,7 +557,33 @@ assesment_end(Request):-
 			title: 'Prolog Intelligent Tutoring Systems',
 			totalScore: TotalScore
 			}, Out, []).
-	
+
+/*
+Βάζει όλεσ τις λίστες μέσα σε μία
+flatten1([a,b,[h,[c,d]],n],L).
+*/
+flatten1([],[]).
+flatten1([H|T],L3):- flatten1(H,L1),flatten1(T,L2),append(L1,L2,L3).
+flatten1(A,[A]).
+
+
+/*
+Μετράει πόσες φορές βρέθηκε ένα το pra,και το χρησιμοποιούμε για να δούμε πόσοι χρήστες έκαναν εξάσκηση.
+countPract([pra,ass,lect,pra],X).
+*/
+countPract(L,X):- countPract(L,0,X).
+countPract([],An,An).
+countPract([H|T],An,I):- H == pra,An1 is An +1, countPract(T,An1,I).
+countPract([H|T],An,I):- H \= pra,countPract(T,An,I).
+
+/*
+Μετράει πόσες φορές βρέθηκε ένα το lct,και το χρησιμοποιούμε για να δούμε πόσοι χρήστες έκαναν τη θεωρία.
+countLect([lct,ass,lct,pra],X).
+*/
+countLect(L,X):- countLect(L,0,X).
+countLect([],An,An).
+countLect([H|T],An,I):- H == lct,An1 is An +1, countLect(T,An1,I).
+countLect([H|T],An,I):- H \= lct,countLect(T,An,I).
 	
 wellDone(NextPage):-
 			format('Content-type: text/html~n~n'),
@@ -441,6 +627,12 @@ logMessage(Message):-
 			title: 'Prolog Intelligent Tutoring Systems',
 			errorMessage: Message
 		}, Out, []).
+		
+failure(Request) :-
+	reply_html_page(
+	   [title('Πρόβλημα :-(')],
+	   [h1('Ουπς! Παρουσιάστηκε κάποιο πρόβλημα!'),
+	    a(href='/logIn','Δοκίμασε να ξανασυνδεθείς!')]).
 			
 
 user_id(UserId) :-

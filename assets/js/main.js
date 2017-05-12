@@ -84,3 +84,20 @@ function lecturePage() {
 
 
 }
+
+function teacherPage() {
+    var commentsList = $('#comments');
+    $.ajax({
+        url: "/feedbackData"
+    }).done(function (commentsArray) {
+        commentsArray.forEach(function (comment) {
+            var li = '<li class="student-element">'
+                + '<div class="ui card student-card">'
+                + '<div class="content">'
+                + '<div class="header">'
+                + comment
+                + '</div></div></div></li>';
+            commentsList.append(li);
+        });
+    });    
+}

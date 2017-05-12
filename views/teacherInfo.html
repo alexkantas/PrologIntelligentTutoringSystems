@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="el">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Alex Kantas">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+
+    <title>{{= title }}</title>
+
+    <!-- Semantic core CSS -->
+    <link href="assets/css/semantic.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="main-background">
+    <div class="ui container">
+
+        <div class="main-segment">
+            <div class="ui segment">
+                <div class="ui huge header">{{= title }}</div>
+                <div class="main-segment-description">
+                    <p>Έχετε κάνει είσοδο στο σύστημα ως καθηγητής</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="paths-area">
+            <div class="ui grid">
+
+                <div class="four wide column">
+                    <div class="ui vertical pointing menu teacher-bar">
+                        <a href="/showUsers" class="item">
+                                Εμφάνιση όλων των χρηστών
+                            </a>
+                        <a href="/showUsersInfo" class="item">
+                                Εμφάνιση προόδου κάθε χρήστη
+                            </a>
+                        <a  class="active item">
+                                Εμφάνιση πληροφοριών σχετικά με την χρήση του συστήματος
+                            </a>
+                        </a>
+                        <a href="/showFeedback" class="item">
+                                Εμφάνιση σχολίων και παρατηρήσεων χρηστών
+                            </a>
+                    </div>
+                </div>
+
+                <div class="twelve wide column">
+                    <div class="ui segment path-object ">
+                        <h2>Εδώ θα βρείτε πληροφορίες σχετικά με τη χρήση του συστήματος.</h2>
+                        <h3>Το σύστημα το χρησιμοποιούν {{= totalUsers }} και έχουν χρησιμοποιήσει το πεδίο της εξάσκησης {{= practiceCount }} φορές χωρίς προβλήματα! </h3>
+                        <h3>Το σύστημα το χρησιμοποιούν {{= totalUsers }} και εχουν ολοκληρώσει την εισήγηση της θεωρίας {{= lecturesCount }} φορές χωρίς προβλήματα!  </h3>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="login-button-area">
+            <a href="/logOut" class="ui negative button">Έξοδος</a>
+        </div>
+        <div class="simple-margin">&nbsp</div>
+
+        <!-- /container -->
+    </div>
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Semantic core JavaScript-->
+    <script src="assets/js/semantic.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>
