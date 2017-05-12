@@ -58,7 +58,6 @@ function practiceHelpPage() {
 }
 
 function practiceSchemaPage() {
-    console.log('We are in!!');
     var $helpButton = $('#help-button');
     var form = document.getElementById('main-form');
     var answerField = document.getElementById('answer');
@@ -72,5 +71,33 @@ function practiceSchemaPage() {
         answerField.value = fixedValue;
     });
 
+
+}
+
+function lecturePage() {
+    var form = document.getElementById('lecture-form');
+    var answerField = document.getElementById('ans');
+    form.addEventListener("submit", function (e) {
+        var fixedValue = answerField.value.trim();
+        answerField.value = fixedValue;
+    });
+
+
+}
+
+function teacherPage(commentsArray) {
+    commentsArray = commentsArray.substr(1, commentsArray.length - 2).split(',');
+    
+    var commentsList = document.getElementById('comments');
+
+    commentsArray.forEach(function (comment) {
+        var li = '<li class="student-element">'
+            + '<div class="ui card student-card">'
+            + '<div class="content">'
+            + '<div class="header">'
+            + comment
+            + '</div></div></div></li>';
+        commentsList.insertAdjacentHTML('beforeend',li);
+    });
 
 }
