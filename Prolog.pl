@@ -186,6 +186,7 @@ code(Request) :-
 		current_output(Out),
 		st_render_file(views/teacherInfoUser, _{
 			title: 'Prolog Intelligent Tutoring Systems',
+			code: Epil,
 			lesson: Lesson_Id,
 			lectureProgress: Lect_values,
 			practiceProgress: Practice_Values,
