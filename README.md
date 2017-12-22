@@ -29,4 +29,4 @@ Developed by **Alexandros Kantas** and **Afroditi Stathaki**
 
 Everything in front-end: HTML files, CSS classes, Javascript functions and some back-end operations: use of Simple-template and Sessions are developed by Alexandros Kantas
 
-Flowchart of application, texts and all core back-end predicates are developed by Afroditi Stathaki
+Flowchart of application, texts and all core back-end predicates are developed by Afroditi Stathaki as part of [her thesis](https://apothesis.lib.teicrete.gr/handle/11713/8504?locale-attribute=en).
