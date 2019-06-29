@@ -70,8 +70,7 @@ checkUserPwd(UserId, PWD)  :-
 	 (UserId = 'std3', PWD=athens);
 	 (UserId = 'tch', PWD=tch).
 
-server(Port) :-
-        http_server(http_dispatch, [port(Port)]).
+:-http_server(http_dispatch, [port(80)]).
 
 serve_files(Request) :-
 	 http_reply_from_files('assets', [], Request).
