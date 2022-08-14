@@ -7,7 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>{{= title }}</title>
+    <title>Prolog Intelligent Tutoring Systems</title>
 
     <!-- Semantic core CSS -->
     <link href="assets/css/semantic.css" rel="stylesheet">
@@ -23,36 +23,16 @@
         <div class="ui column">
             <div class="main-form-area">
 			
-			{{ if errorMessage=1 }}
-                <div class="ui negative message">
-                    <i class="close icon"></i>
-                    <div class="header">
-                        Τα στοιχεία που δώσατε είναι λάθος
-                    </div>
-                    <p>Παρακαλώ προσπαθήστε ξανά</p>
-                </div>
-			{{ end }}
-			
-			{{ if errorMessage=2 }}
-                <div class="ui positive message">
-                    <i class="close icon"></i>
-                    <div class="header">
-                        Επιτυχής αποσύνδεση
-                    </div>
-                    <p>Αποσυνδεθήκατε επιτυχώς απο το σύστημα</p>
-                </div>
-			{{ end }}
-			
                 <div class="ui attached icon message">
                     <i class="student icon"></i>
                     <div class="content">
                         <div class="header">
-                            <h1>{{= title }}</h1>
+                            <h1>Prolog Intelligent Tutoring Systems</h1>
                         </div>
                         <p>Παρακαλώ εισάγετε το όνομα και το κωδικό χρήστη</p>
                     </div>
                 </div>
-                <form id="log-in-form" class="ui big form attached fluid segment" action="/welcome" method="post">
+                <form id="log-in-form" class="ui big form attached fluid segment" action="./welcome.html" method="get">
                     <div class="field">
                         <label>Όνομα χρήστη</label>
                         <input name="username" value="std1" placeholder="Γράψε το όνομα χρήστη σου" type="text" required>

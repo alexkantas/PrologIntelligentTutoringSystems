@@ -7,13 +7,13 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>{{= title }}</title>
+    <title>Prolog Intelligent Tutoring Systems</title>
 
     <!-- Semantic core CSS -->
-    <link href="assets/css/semantic.css" rel="stylesheet">
+    <link href="./assets/css/semantic.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="./assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -22,7 +22,7 @@
 
         <div class="main-segment">
             <div class="ui segment">
-                <div class="ui huge header">{{= title }}</div>
+                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
                 <div class="main-segment-description">
                     <p>Παρακάτω παρουσιάζεται η θεωρία και μια ερώτηση κατανόησης.</p>
                     <p>Εφόσον διαβάσετε τη θεωρία πατήστε το κουμπί 'Συνέχεια'</p>
@@ -40,20 +40,17 @@
                     <div class="ui segments">
                         <div class="ui segment">
                             <h1>Στόχος Μαθήματος</h1>
-                            <p>{{= goal }}</p>
+                            <p>Να κατανοήσουν την τεχνική κατασκευής δομής στην κεφαλή μια πρότασης στην Prolog </p>
+                            <p>Να μπορούν να συντάξουν πραγράμματα και με αυτή την τεχνική.</p>
                         </div>
                         <div class="ui brown segment">
                             <h1>Θεωρία</h1>
-                            <a href="/assets/pdf/{{= lesson }}{{= theory }}.pdf" class="ui primary labeled icon button" download>
+                            <a href="./assets/pdf/les3theory1.pdf" class="ui primary labeled icon button" download>
                             <i class="download icon"></i>Λήψη</a> 
-                            {{ if theory="theory1" }}
-                            <p>{{= theoryText1 }}</p>
-                            {{ end }} {{ if theory="theory2" }}
-                            <p>{{= theoryText2 }}</p>
-                            {{ end }}
+                            <p>Κατασκευή δομή στην κεφαλή μιας πρότασης: Είναι μια προγραμματιστική τεχνική που βοηθά στην κατασκευή προγραμματων σε Prolog. Το αποτέλεσμα αυτής της τεχνικής συσσωρεύεται στην επαγωγική δομή δεδομένων χρησιμοποιώντας τη στοίβα της Prolog. Η επαγωγική δομή που δημιουργείται σε κάθε αναδρομική κλήση είναι ημιτελές και δεν υπάρχει πρόσβαση στο τμήμα που έχει ήδη καταστευαστεί. Ένα τμήμα της αναμένεται να ολοκληρωθεί από την αναδρομική επεξεργασία των υπόλοιπων στοιχείων της επαγωγικής δομής η οποία ελέγχει την αναδρομή.</p>
                         </div>
                         <div class="ui brown segment lecture-element">
-                            <iframe src="/assets/pdf/{{= lesson }}{{= theory }}.pdf" id="pdf" class="full-width-height"></iframe>
+                            <iframe src="./assets/pdf/les3theory1.pdf" id="pdf" class="full-width-height"></iframe>
                         </div>
                     </div>
                 </div>
@@ -62,7 +59,7 @@
         </div>
 
         <div class="login-button-area">
-            <a href="/lectureAns" class="ui primary button" form="feedback-form">Συνέχεια</a>
+            <a href="./lectureAns.html" class="ui primary button" form="feedback-form">Συνέχεια</a>
         </div>
 
         <div class="simple-margin">&nbsp</div>

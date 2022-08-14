@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="el">
 
@@ -7,13 +8,13 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>{{= title }}</title>
+    <title>Prolog Intelligent Tutoring Systems</title>
 
     <!-- Semantic core CSS -->
-    <link href="assets/css/semantic.css" rel="stylesheet">
+    <link href="./assets/css/semantic.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="./assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -40,9 +41,17 @@
                             <h1 class="ui dividing header">Ερώτηση </h1>
 
                             <p id="question-1-description" class="review-text">
-                                {{= question }}
+                                Να φτιάξετε ένα κατηγόρημα deleteAll το οπίο θα σβήνει όλες τις εμφανίσεις των στοιχείων X από τη λίστα List1,δημιουργώντας τη λίστα List2. Στο πεδίο της απάντησης δώσε τη δεύτερη περίπτωση σύμφωνα με το σχήμα.
                             </p>
-                            <form id="main-form" class="ui form" action="/practiceAnswer" method="POST">
+
+                            <div class="ui raised segment">
+                                <div id="help-area">
+                                    <p id="help-text"></p>
+                                    <button id="help-button" class="ui basic green icon button help-button"><i class="large grey life ring icon"></i></button>
+                                </div>
+                            </div>
+
+                            <form id="main-form" class="ui form" action="./wellDone.html" method="GET">
                                 <div class="field">
                                     <label>Απάντηση</label>
                                     <textarea id="answer" type="text" name="ans" rows="2" required></textarea>
@@ -72,13 +81,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!-- Semantic core JavaScript-->
-    <script src="assets/js/semantic.js"></script>
+    <script src="./assets/js/semantic.js"></script>
 
     <!-- Custom JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="./assets/js/main.js"></script>
 
     <script>
-        practiceHelpPage();
+        practiceHelpPage("Βασική περίπτωση είναι όταν List1 είναι άδεια.","Γενική περίπτωση 1: Το στοιχείο X είναι η κεφαλή της λίστας List1.","Γενική περίπτωση 2: Το στοιχείο X είναι κάποιο στοιχείο της ουράς της λίστας List1.")
     </script>
 
 </body>

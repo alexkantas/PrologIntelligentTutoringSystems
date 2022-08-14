@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="el">
 
@@ -7,13 +8,13 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
 
-    <title>{{= title }}</title>
+    <title>Prolog Intelligent Tutoring Systems</title>
 
     <!-- Semantic core CSS -->
-    <link href="assets/css/semantic.css" rel="stylesheet">
+    <link href="./assets/css/semantic.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="./assets/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -22,7 +23,7 @@
 
         <div class="main-segment">
             <div class="ui segment">
-                <div class="ui huge header">{{= title }}</div>
+                <div class="ui huge header">Prolog Intelligent Tutoring Systems</div>
                 <div class="main-segment-description">
                     <p>Στο δεξί μέρος της σελίδας υπάρχει το περιβάλλον εργασίας στο οποίο θα ελέγχεται το λειτουργικό κομμάτι
                         της άσκησης πριν την υποβάλλεται στο σύστημα στο πεδίο απάντηση!</p>
@@ -40,17 +41,11 @@
                             <h1 class="ui dividing header">Ερώτηση </h1>
 
                             <p id="question-1-description" class="review-text">
-                                {{= question }}
+                                Να φτιάξετε ένα κατηγόρημα deleteAll το οπίο θα σβήνει όλες τις εμφανίσεις των στοιχείων X από τη λίστα List1,δημιουργώντας τη λίστα List2. Στο πεδίο της απάντησης δώσε τη δεύτερη περίπτωση σύμφωνα με το σχήμα.
                             </p>
 
-                            <div class="ui raised segment">
-                                <div id="help-area">
-                                    <p id="help-text"></p>
-                                    <button id="help-button" class="ui basic green icon button help-button"><i class="large grey life ring icon"></i></button>
-                                </div>
-                            </div>
 
-                            <form id="main-form" class="ui form" action="/practiceAnswer" method="POST">
+                            <form id="main-form" class="ui form" action="./wellDone.html" method="GET">
                                 <div class="field">
                                     <label>Απάντηση</label>
                                     <textarea id="answer" type="text" name="ans" rows="2" required></textarea>
@@ -76,19 +71,6 @@
 
         <!-- /container -->
     </div>
-    <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-    <!-- Semantic core JavaScript-->
-    <script src="assets/js/semantic.js"></script>
-
-    <!-- Custom JS -->
-    <script src="assets/js/main.js"></script>
-
-    <script>
-        practiceHelpPage("{{= help1 }}","{{= help2 }}","{{= help3 }}")
-    </script>
-
 </body>
 
 </html>
